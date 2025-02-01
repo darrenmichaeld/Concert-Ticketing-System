@@ -30,6 +30,15 @@ export const eventController = {
     }
   },
 
+  createEventFromSheet: async (data: any) => {
+    try {
+      const newEvent = await strapiService.post('events', data);
+      console.log('Created new event:', newEvent);
+    } catch (error) {
+      console.error('Error creating event:', error);
+    }
+  },
+
   updateEvent: async (req: Request, res: Response) => {
     try {
       const eventId = req.params.id;

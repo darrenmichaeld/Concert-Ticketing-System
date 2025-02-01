@@ -1,14 +1,15 @@
 import axios from 'axios';
-const config = require('../config');
 
 // It's a good practice to create an axios instance with default config
-const strapiApi = axios.create({
-  baseURL: config.STRAPI_URL,
+export const strapiApi = axios.create({
+  baseURL: "http://localhost:1337",
   headers: {
-    Authorization: `Bearer ${config.STRAPI_TOKEN}`,
+    Authorization: `Bearer 98d11447c62f35e0fbe019cdcf33187fc911f642b01d50080e6376d89d328b64cd942cd54fa29a93b26e4d189c9f770d0551226584abf42ef0b85fa35e2b1409e26aee8a2d337a0fb72d72b934f437db4e533b333d67d676e96a8c32c1225a9358366c2bcaad9da9920a54aa85591f3e32ac35f99779149abf2080209231393c`,
     'Content-Type': 'application/json',
   },
 });
+
+
 
 export const strapiService = {
   async get(endpoint: string) {

@@ -30,6 +30,15 @@ export const ticketController = {
     }
   },
 
+  createTicketFromSheet: async (data: any) => {
+    try {
+      const newTicket = await strapiService.post('tickets', data);
+      console.log('Created new ticket:', newTicket);
+    } catch (error) {
+      console.error('Error creating ticket:', error);
+    }
+  },
+
   updateTicket: async (req: Request, res: Response) => {
     try {
       const ticketId = req.params.id;
@@ -48,5 +57,15 @@ export const ticketController = {
     } catch (error) {
       res.status(404).json({ message: 'Error deleting ticket', error });
     }
-  }
+  },
+
+  deleteTicketFromSheet: async (data: any) => {
+    try {
+      const { deleteId } = data;
+      const deletedEvent = await strapiService.delete('events', deleteId);
+      console.log('Deleted event with id:', deleteId);
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  },
 };
