@@ -57,5 +57,14 @@ export const eventController = {
     } catch (error) {
       res.status(404).json({ message: 'Error deleting event', error });
     }
+  },
+
+  deleteEventFromSheet: async (data: any) => {
+    try {
+      const deletedEvent = await strapiService.delete('events', data);
+      console.log('Deleted event:', deletedEvent);
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
   }
 };
