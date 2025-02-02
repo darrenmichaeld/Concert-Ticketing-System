@@ -38,8 +38,14 @@
       ],
       "required": true
     },
-    "numberOfGuess": {
-      "type": "integer"
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "seat": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

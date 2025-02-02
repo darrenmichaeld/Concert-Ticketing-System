@@ -391,7 +391,9 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
     max_capacity: Schema.Attribute.Integer;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     publishedAt: Schema.Attribute.DateTime;
     start_time: Schema.Attribute.Time;
     updatedAt: Schema.Attribute.DateTime;
@@ -425,9 +427,12 @@ export interface ApiTicketTicket extends Struct.CollectionTypeSchema {
       'api::ticket.ticket'
     > &
       Schema.Attribute.Private;
-    numberOfGuess: Schema.Attribute.Integer;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Float;
     publishedAt: Schema.Attribute.DateTime;
+    seat: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     statusTicket: Schema.Attribute.Enumeration<
       ['Available', 'Reserved', 'Sold']
     > &
