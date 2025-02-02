@@ -1,5 +1,5 @@
+import React from 'react'
 import { Navigate, useRoutes } from 'react-router-dom';
-
 import { Suspense } from 'react';
 import Main from '../pages/main';
 
@@ -10,7 +10,7 @@ export function Router() {
     {
       path: '/',
       element: (
-        <Suspense>
+        <Suspense fallback="">
           <Main/>
         </Suspense>
       ),
