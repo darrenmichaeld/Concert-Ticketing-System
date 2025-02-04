@@ -1,3 +1,6 @@
+
+// npx ts-node src/index.ts  
+
 import express from "express"
 import { eventController } from './controllers/event-controller';
 import { ticketController } from './controllers/ticket-controller';

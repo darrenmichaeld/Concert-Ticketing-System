@@ -1,13 +1,15 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs"
 import EventList from "../components/EventList"
 import TicketList from "../components/TicketList"
 import { MetricsSection } from "../components/metrics-section"
 import { SalesChart } from "../components/sales-chart"
+import { useEventTicketData } from "../hooks/useEventTicketFetch"
 
 export default function Main() {
   const [activeTab, setActiveTab] = useState("events")
+  const { data } = useEventTicketData()
 
   return (
     <div className="min-h-screen">
@@ -35,10 +37,10 @@ export default function Main() {
                 <TabsTrigger value="tickets" className="flex-1 text-sm xs:text-base">Tickets</TabsTrigger>
               </TabsList>
               <TabsContent value="events" className="mt-3 xs:mt-4">
-                <EventList />
+                <EventList events={data?.events || []} />
               </TabsContent>
               <TabsContent value="tickets" className="mt-3 xs:mt-4">
-                <TicketList />
+                <TicketList tickets={data?.tickets || []} />
               </TabsContent>
             </Tabs>
           </div>
@@ -46,7 +48,7 @@ export default function Main() {
           {/* Status Bar */}
           <div className="bg-white rounded-lg p-2 xs:p-3 sm:p-4 flex flex-col xs:flex-row items-start xs:items-center justify-between text-xs sm:text-sm text-gray-500 space-y-2 xs:space-y-0">
             <div className="text-[11px] xs:text-xs sm:text-sm">
-              Last updated: {new Date().toLocaleTimeString()} (Every 15 seconds)
+              Last updated: {data?.lastUpdated} (Every 15 seconds)
             </div>
             <div className="flex items-center gap-1.5 xs:gap-2">
               <div className="w-1.5 h-1.5 xs:w-2 xs:h-2 bg-green-500 rounded-full" />

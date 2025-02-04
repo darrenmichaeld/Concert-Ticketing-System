@@ -30,10 +30,8 @@ export function SalesChart() {
             <YAxis
               stroke="#888888"
               fontSize={12}
-              tickLine={false}
+              tickLine={true}
               axisLine={false}
-              tickFormatter={(value) => `${value}`}
-              dx={-10}
             />
             <Tooltip 
               contentStyle={{ 

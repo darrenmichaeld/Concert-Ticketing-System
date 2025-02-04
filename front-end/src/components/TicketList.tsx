@@ -1,31 +1,13 @@
 import React from "react"
-import { useQuery } from "@tanstack/react-query"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import type { Ticket, TicketsResponse } from "../components/lib/types"
+import type { Ticket } from "../components/lib/types"
 
-export default function TicketList() {
-  const fetchTickets = async (): Promise<Ticket[]> => {
-    const response = await fetch("http://localhost:3000/tickets")
-    if (!response.ok) {
-      throw new Error("Network response was not ok")
-    }
-    const data: TicketsResponse = await response.json()
-    return data.data
-  }
+interface TicketListProps {
+  tickets: Ticket[]
+}
 
-  const {
-    data: tickets,
-    isLoading,
-    error,
-  } = useQuery<Ticket[], Error>({
-    queryKey: ["tickets"],
-    queryFn: fetchTickets,
-    refetchInterval: 15000,
-  })
-
-  if (isLoading) return <div className="text-center p-4">Loading tickets...</div>
-  if (error) return <div className="text-center p-4 text-red-500">Error fetching tickets: {error.message}</div>
+export default function TicketList({ tickets }: TicketListProps) {
   if (!tickets || tickets.length === 0) return <div className="text-center p-4">No tickets found.</div>
 
   return (

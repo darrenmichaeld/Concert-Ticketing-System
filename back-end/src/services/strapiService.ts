@@ -10,7 +10,6 @@ export const strapiApi = axios.create({
 });
 
 
-
 export const strapiService = {
   async get(endpoint: string) {
     const response = await strapiApi.get(`/api/${endpoint}`);

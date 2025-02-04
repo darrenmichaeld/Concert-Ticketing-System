@@ -1,5 +1,5 @@
 import { DollarSign, Users, Calendar, Ticket } from 'lucide-react'
-import { MetricCard } from "./metric-card"
+import { MetricCard } from "./reusable-components/metric-card"
 import React from "react"
 
 const metrics = [

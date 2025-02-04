@@ -1,31 +1,13 @@
 import React from "react"
-import { useQuery } from "@tanstack/react-query"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import type { Event, EventsResponse } from "../components/lib/types"
+import type { Event } from "../components/lib/types"
 
-export default function EventList() {
-  const fetchEvents = async (): Promise<Event[]> => {
-    const response = await fetch("http://localhost:3000/events")
-    if (!response.ok) {
-      throw new Error("Network response was not ok")
-    }
-    const data: EventsResponse = await response.json()
-    return data.data
-  }
+interface EventListProps {
+  events: Event[]
+}
 
-  const {
-    data: events,
-    isLoading,
-    error,
-  } = useQuery<Event[], Error>({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
-    refetchInterval: 15000,
-  })
-
-  if (isLoading) return <div className="text-center p-4">Loading events...</div>
-  if (error) return <div className="text-center p-4 text-red-500">Error fetching events: {error.message}</div>
+export default function EventList({ events }: EventListProps) {
   if (!events || events.length === 0) return <div className="text-center p-4">No events found.</div>
 
   return (
